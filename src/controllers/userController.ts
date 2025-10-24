@@ -4,13 +4,13 @@ import { db } from "../config/db";
 import { ResultSetHeader } from "mysql2";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
-import { loginSchema } from "../utils/validation";
+import { loginSchema, registrationSchema } from "../utils/validation";
 import { SessionManager } from "../services/sessionManager";
 
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {error} = loginSchema.validate(req.body);
+        const {error} = registrationSchema.validate(req.body);
         if(error){
             res.status(400).json({message: error.details[0].message});
             return;
